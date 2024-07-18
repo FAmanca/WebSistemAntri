@@ -1,6 +1,7 @@
-let antrian = 23;
+let antrian = 3;
 let antrianSpan = document.getElementById("antrian");
 let audioAntrianNomor = document.getElementById("audio-antrian-nomor");
+let audioAnnoucement = document.getElementById("audio-announcement")
 let audioNumbers = {};
 
 // Preload audio for numbers 0-9
@@ -43,7 +44,12 @@ function minusAntrian() {
 function playNextSound() {
   isPlaying = true;
   audioAntrianNomor.currentTime = 0; // Kembali ke awal audio untuk memastikan diputar dari awal
-  audioAntrianNomor.play();
+  audioAnnoucement.play();
+
+  setTimeout(function() {
+    audioAntrianNomor.play();
+  }, 3000); 
+
   audioAntrianNomor.addEventListener("ended", function playNumber() {
     audioAntrianNomor.removeEventListener("ended", playNumber); // Hapus event listener setelah dipanggil sekali
     playNumberSound(antrian); // Panggil fungsi untuk memainkan suara angka setelah suara "antrian, nomor" selesai diputar
@@ -76,8 +82,13 @@ function playDipersilahkan() {
 function playTwoDigits() {
     let angkaPertama = Math.floor(antrian / 10);
     let angkaKedua = antrian % 10;
-  
-    audioAntrianNomor.play();
+
+    audioAnnoucement.play();
+
+    setTimeout(function() {
+      audioAntrianNomor.play();
+    }, 3000); 
+    // audioAntrianNomor.play();
     audioAntrianNomor.addEventListener("ended", function playFirstNumber() {
       audioAntrianNomor.removeEventListener("ended", playFirstNumber); // Hapus event listener setelah dipanggil sekali
       playNumberSound(angkaPertama); // Memainkan suara angka pertama
